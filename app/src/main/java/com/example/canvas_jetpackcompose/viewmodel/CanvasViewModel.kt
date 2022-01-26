@@ -1,6 +1,5 @@
 package com.example.canvas_jetpackcompose.viewmodel
 
-import android.content.ContentValues.TAG
 import android.os.CountDownTimer
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -17,10 +16,11 @@ class CanvasViewModel : ViewModel() {
         timer = object : CountDownTimer(totalSec, 1000) {
             override fun onTick(p0: Long) {
                 _second.value = second
+                second--
             }
 
             override fun onFinish() {
-                Log.d(TAG, "onFinish: Time Finished")
+                Log.d("CanvasFinish", "onFinish: Time Finished")
             }
         }
 

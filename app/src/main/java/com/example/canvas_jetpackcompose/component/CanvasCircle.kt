@@ -34,23 +34,29 @@ fun CanvasCircle(
 ) {
     val animationPlayed = remember { mutableStateOf(false) }
 
-    val curPercentage =
-        animateFloatAsState(
-            targetValue = if (animationPlayed.value) percentage else 0f,
-            animationSpec = tween(
-                durationMillis = animDuration,
-                delayMillis = animDelay
-            )
+    val curPercentage = animateFloatAsState(
+        targetValue = if (animationPlayed.value) percentage else 0f,
+        animationSpec = tween(
+            durationMillis = animDuration,
+            delayMillis = animDelay
         )
-    LaunchedEffect(key1 = true) {
+    )
+
+    LaunchedEffect(
+        key1 = true
+    ) {
         animationPlayed.value = true
     }
 
     Box(
-        modifier = Modifier.size(radius * 2f),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
+        modifier = Modifier
+            .size(radius * 2f)
     ) {
-        Canvas(modifier = Modifier.size(radius * 2f)) {
+        Canvas(
+            modifier = Modifier
+                .size(radius * 2f)
+        ) {
             drawCircle(
                 SolidColor(Color.LightGray),
                 radius = size.width / 2,
@@ -61,7 +67,7 @@ fun CanvasCircle(
 
             drawArc(
                 color = Color(0xFFD3212D),
-                startAngle = 90f,
+                startAngle = -90f,
                 sweepAngle = convertVal,
                 useCenter = false,
                 style = Stroke(strokeWidth.toPx(), cap = StrokeCap.Round)
@@ -70,11 +76,9 @@ fun CanvasCircle(
 
         Text(
             text = (curPercentage.value).toInt().toString(),
-            color = Purple500,
+            color = Color.White,
             fontSize = fontSize,
             fontWeight = FontWeight.Bold
         )
-
     }
-
 }
